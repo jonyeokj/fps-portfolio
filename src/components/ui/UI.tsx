@@ -1,16 +1,11 @@
-import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+'use client';
 
-const ScreenContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  z-index: 100;
-`;
+import React, { ReactNode } from 'react';
 
 export const UI = ({ children }: { children: ReactNode }) => {
-  return <ScreenContainer>{children}</ScreenContainer>;
+  return (
+    <div className='absolute top-0 left-0 w-screen h-screen z-[100] flex'>
+      {children}
+    </div>
+  );
 };
