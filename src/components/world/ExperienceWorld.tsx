@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Physics } from '@react-three/cannon';
@@ -19,41 +19,42 @@ const ExperienceWorld = () => {
     }[]
   >([]);
 
-  // Sets up a global click listener that triggers a raycast from the camera on click.
-  // If an object is hit, adds a bullet hole decal at the intersection point.
+  // Raycast from camera center and add a bullet hole to the first non-ball object hit
+  const shoot = useCallback(() => {
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+    const intersects = raycaster.intersectObjects(scene.children, true);
+
+    const hit = intersects.find((i) => !i.object.userData.isBall);
+    if (hit && hit.point && hit.face) {
+      const id = crypto.randomUUID();
+
+      // Convert face normal to world space
+      const normalMatrix = new THREE.Matrix3().getNormalMatrix(
+        hit.object.matrixWorld,
+      );
+      const worldNormal = hit.face.normal
+        .clone()
+        .applyMatrix3(normalMatrix)
+        .normalize();
+
+      setBulletHoles((prev) => [
+        ...prev,
+        {
+          id,
+          position: [hit.point.x, hit.point.y, hit.point.z],
+          normal: [worldNormal.x, worldNormal.y, worldNormal.z],
+        },
+      ]);
+    }
+  }, [camera, scene]);
+
+  // Set up global click listener for shooting
   useEffect(() => {
-    const handleClick = () => {
-      const raycaster = new THREE.Raycaster();
-      raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
-      const intersects = raycaster.intersectObjects(scene.children, true);
-
-      const hit = intersects[0];
-      if (hit && hit.point && hit.face) {
-        const id = crypto.randomUUID();
-
-        // Convert face normal to world space
-        const normalMatrix = new THREE.Matrix3().getNormalMatrix(
-          hit.object.matrixWorld,
-        );
-        const worldNormal = hit.face.normal
-          .clone()
-          .applyMatrix3(normalMatrix)
-          .normalize();
-
-        setBulletHoles((prev) => [
-          ...prev,
-          {
-            id,
-            position: [hit.point.x, hit.point.y, hit.point.z],
-            normal: [worldNormal.x, worldNormal.y, worldNormal.z],
-          },
-        ]);
-      }
-    };
-
+    const handleClick = () => shoot();
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
-  }, [camera, scene]);
+  }, [shoot]);
 
   return (
     <>
