@@ -10,7 +10,7 @@ import BallManager from './BallManager';
 import BulletHole from './BulletHole';
 
 const ExperienceWorld = () => {
-  const { camera, scene } = useThree();
+  const { camera, scene, gl } = useThree();
   const [bulletHoles, setBulletHoles] = useState<
     {
       id: string;
@@ -51,10 +51,16 @@ const ExperienceWorld = () => {
 
   // Set up global click listener for shooting
   useEffect(() => {
-    const handleClick = () => shoot();
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, [shoot]);
+    const canvas = gl.domElement;
+    const onMouseDown = (e: MouseEvent) => {
+      if (e.button !== 0) return;
+      if (document.pointerLockElement !== canvas) return;
+      shoot();
+    };
+
+    canvas.addEventListener('mousedown', onMouseDown);
+    return () => canvas.removeEventListener('mousedown', onMouseDown);
+  }, [gl, shoot]);
 
   return (
     <>

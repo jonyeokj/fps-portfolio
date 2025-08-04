@@ -1,11 +1,13 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export const UI = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='absolute top-0 left-0 w-screen h-screen z-[100] flex'>
-      {children}
+    <div className='absolute pointer-events-none inset-0 z-50 select-none'>
+      <div className='pointer-events-auto' onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>
   );
 };
