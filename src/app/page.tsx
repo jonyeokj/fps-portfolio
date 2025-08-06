@@ -10,7 +10,7 @@ import { PointerLockOverlay } from '@/components/ui/PointerLockOverlay';
 import { usePointerLock } from '@/hooks/usePointerLock';
 
 const Page = () => {
-  const { isLocked, canLock, elementRef } = usePointerLock();
+  const { isLocked, canLock } = usePointerLock();
 
   return (
     <main className='h-screen w-screen bg-black'>
@@ -19,13 +19,7 @@ const Page = () => {
         {isLocked && <Crosshair />}
         <Score />
       </UI>
-      <Canvas
-        camera={{ fov: 75, position: [0, 2, 5] }}
-        onCreated={({ gl }) => {
-          // console.log('assigning canvasRef:', gl.domElement);
-          elementRef.current = gl.domElement;
-        }}
-      >
+      <Canvas camera={{ fov: 75, position: [0, 2, 5] }}>
         <ambientLight intensity={0.4} />
         <hemisphereLight args={['#ffffff', '#444444', 0.3]} />
         <directionalLight position={[5, 10, 2]} intensity={1} castShadow />
