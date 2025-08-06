@@ -6,9 +6,11 @@ import Wall from './Wall';
 import BallManager from './BallManager';
 import BulletHole from './BulletHole';
 import { useShoot } from '@/hooks/useShoot';
+import { useScoreLookAt } from '@/hooks/useScoreLookAt';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
+  useScoreLookAt();
 
   return (
     <>

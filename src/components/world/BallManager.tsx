@@ -34,26 +34,37 @@ const generateNonOverlappingPosition = (existing: Position[]): Position => {
 };
 
 const BallManager = () => {
-  const [balls, setBalls] = useState<{ id: string; position: Position }[]>([]);
+  const [balls, setBalls] = useState<
+    { id: string; position: Position; color?: string }[]
+  >([]);
+  const gameStarted = useGameStore((s) => s.gameStarted);
+  const startGame = useGameStore((s) => s.startGame);
   const incrementScore = useGameStore((state) => state.incrementScore);
 
-  // Spawn 5 balls on mount
+  // Show one center ball before the game starts, spawn 5 balls when the game starts
   useEffect(() => {
-    const newBalls: { id: string; position: Position }[] = [];
-
-    for (let i = 0; i < 5; i++) {
-      const position = generateNonOverlappingPosition(
-        newBalls.map((b) => b.position),
-      );
-      newBalls.push({ id: uuidv4(), position });
+    if (!gameStarted) {
+      setBalls([{ id: 'intro-ball', position: [0, 5, -14], color: 'gold' }]);
+    } else {
+      const newBalls = [];
+      for (let i = 0; i < 5; i++) {
+        const position = generateNonOverlappingPosition(
+          newBalls.map((b) => b.position),
+        );
+        newBalls.push({ id: uuidv4(), position });
+      }
+      setBalls(newBalls);
     }
-
-    setBalls(newBalls);
-  }, []);
+  }, [gameStarted]);
 
   // Handle click/hit
   const handleHit = useCallback(
     (id: string) => {
+      if (!gameStarted && id === 'intro-ball') {
+        startGame();
+        return;
+      }
+
       setBalls((prev) => {
         const next = prev.filter((b) => b.id !== id);
 
@@ -69,7 +80,7 @@ const BallManager = () => {
 
       incrementScore();
     },
-    [incrementScore],
+    [gameStarted, startGame, incrementScore],
   );
 
   return (
@@ -80,6 +91,8 @@ const BallManager = () => {
           id={ball.id}
           position={ball.position}
           onHit={handleHit}
+          color={ball.color}
+          isMoving={gameStarted}
         />
       ))}
     </>

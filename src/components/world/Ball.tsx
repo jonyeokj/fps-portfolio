@@ -10,9 +10,16 @@ type BallProps = {
   color?: string;
   id: string;
   onHit: (id: string) => void;
+  isMoving?: boolean;
 };
 
-const Ball = ({ position, color = 'cyan', id, onHit }: BallProps) => {
+const Ball = ({
+  position,
+  color = 'cyan',
+  id,
+  onHit,
+  isMoving = true,
+}: BallProps) => {
   const [ref, api] = useSphere(() => ({
     type: 'Kinematic',
     position,
@@ -23,6 +30,8 @@ const Ball = ({ position, color = 'cyan', id, onHit }: BallProps) => {
   const base = useRef<[number, number, number]>(position);
 
   useFrame((_, delta) => {
+    if (!isMoving) return;
+
     t.current += delta;
 
     const [baseX, baseY, baseZ] = base.current;
