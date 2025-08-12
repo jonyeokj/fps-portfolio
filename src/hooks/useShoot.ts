@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { usePointerStore } from '@/stores/pointerStore';
 
 type BulletHole = {
   id: string;
@@ -13,6 +14,7 @@ type BulletHole = {
 export const useShoot = () => {
   const { camera, scene, gl } = useThree();
   const [bulletHoles, setBulletHoles] = useState<BulletHole[]>([]);
+  const isLocked = usePointerStore((s) => s.isLocked);
 
   // Raycast from camera center and add a bullet hole to the first non-ball object hit
   const shoot = useCallback(() => {
@@ -46,16 +48,15 @@ export const useShoot = () => {
 
   // Set up global click listener for shooting
   useEffect(() => {
-    const canvas = gl.domElement;
     const onMouseDown = (e: MouseEvent) => {
       if (e.button !== 0) return;
-      if (document.pointerLockElement !== canvas) return;
+      if (!isLocked) return;
       shoot();
     };
 
-    canvas.addEventListener('mousedown', onMouseDown);
-    return () => canvas.removeEventListener('mousedown', onMouseDown);
-  }, [gl, shoot]);
+    document.addEventListener('mousedown', onMouseDown);
+    return () => document.removeEventListener('mousedown', onMouseDown);
+  }, [gl, shoot, isLocked]);
 
   const expireHole = (id: string) =>
     setBulletHoles((prev) => prev.filter((b) => b.id !== id));
