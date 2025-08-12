@@ -4,7 +4,7 @@ type GroundProps = {
   color?: string;
 };
 
-const Ground = ({ color = 'grey' }: GroundProps) => {
+const Ground = ({ color = 'white' }: GroundProps) => {
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0],
     position: [0, 0, 0],

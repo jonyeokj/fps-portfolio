@@ -11,8 +11,8 @@ export const useScoreLookAt = () => {
   const targetQuat = useRef<THREE.Quaternion | null>(null);
 
   useEffect(() => {
-    if (score !== 0 && score % 10 === 0) {
-      const target = new THREE.Vector3(0, 5, -14);
+    if (score == 10) {
+      const target = new THREE.Vector3(0, 5, -20);
 
       // Compute desired quaternion
       const lookAtMatrix = new THREE.Matrix4();

@@ -2,6 +2,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { PointerLockControls } from '@react-three/drei';
+import { Sky } from '@react-three/drei';
 import ExperienceWorld from '@/components/world/ExperienceWorld';
 import { UI } from '@/components/ui/UI';
 import Score from '@/components/ui/Score';
@@ -23,6 +24,7 @@ const Page = () => {
         <ambientLight intensity={0.4} />
         <hemisphereLight args={['#ffffff', '#444444', 0.3]} />
         <directionalLight position={[5, 10, 2]} intensity={1} castShadow />
+        <Sky sunPosition={[0, 1, 0]} />
         <ExperienceWorld />
         <PointerLockControls selector='canvas' />
       </Canvas>
