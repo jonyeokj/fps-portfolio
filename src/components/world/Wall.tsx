@@ -6,17 +6,19 @@ type WallProps = {
   position: [number, number, number];
   rotation?: [number, number, number];
   color?: string;
+  width?: number;
+  height?: number;
+  depth?: number;
 };
 
 const Wall = ({
   position,
   rotation = [0, 0, 0],
   color = '#8e8e8e',
+  width = 1,
+  height = 12,
+  depth = 32,
 }: WallProps) => {
-  const width = 1; // thickness
-  const height = 12; // height
-  const depth = 32; // width/length
-
   const [ref] = useBox(() => ({
     args: [width, height, depth],
     position,

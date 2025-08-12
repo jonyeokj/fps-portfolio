@@ -8,6 +8,7 @@ import BallManager from './BallManager';
 import BulletHole from './BulletHole';
 import { useShoot } from '@/hooks/useShoot';
 import { useScoreLookAt } from '@/hooks/useScoreLookAt';
+import Card from './Card';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
@@ -24,6 +25,9 @@ const ExperienceWorld = () => {
           color='white'
         />
         <BallManager />
+        <group position={[5, 3, 0]} rotation={[0, -Math.PI / 2, 0]}>
+          <Card width={1.2} height={1.8} />
+        </group>
       </Physics>
 
       {bulletHoles.map((hole) => (

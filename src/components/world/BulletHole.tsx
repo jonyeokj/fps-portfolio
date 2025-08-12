@@ -42,7 +42,7 @@ const BulletHole = ({ position, normal, onExpire }: BulletHoleProps) => {
     <mesh ref={ref} position={position}>
       <circleGeometry args={[0.05, 32]} />
       <meshBasicMaterial
-        color='grey'
+        color='white'
         transparent
         opacity={opacity}
         depthWrite={false}
