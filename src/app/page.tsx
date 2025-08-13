@@ -22,8 +22,8 @@ const Page = () => {
         <Score />
       </UI>
 
-      <Canvas camera={{ fov: 75, position: [0, 2, 0] }}>
-        <ambientLight intensity={0.4} />
+      <Canvas camera={{ fov: 75, position: [0, 2, 0] }} shadows>
+        <ambientLight intensity={0.5} />
         <hemisphereLight args={['#ffffff', '#444444', 0.3]} />
         <directionalLight position={[5, 10, 2]} intensity={1} castShadow />
         <ExperienceWorld />

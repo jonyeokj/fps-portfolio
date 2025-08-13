@@ -9,6 +9,7 @@ import BulletHole from './BulletHole';
 import { useShoot } from '@/hooks/useShoot';
 import { useScoreLookAt } from '@/hooks/useScoreLookAt';
 import Card from './Card';
+import { EXPERIENCES } from '@/constants';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
@@ -26,7 +27,14 @@ const ExperienceWorld = () => {
         />
         <BallManager />
         <group position={[5, 3, 0]} rotation={[0, -Math.PI / 2, 0]}>
-          <Card width={1.2} height={1.8} />
+          {EXPERIENCES.map((exp) => (
+            <Card
+              key={exp.header}
+              header={exp.header}
+              date={exp.date}
+              subtext={exp.subtext}
+            />
+          ))}
         </group>
       </Physics>
 
