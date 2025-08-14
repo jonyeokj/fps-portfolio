@@ -14,7 +14,7 @@ type Position = [number, number, number];
 const generateNonOverlappingPosition = (existing: Position[]): Position => {
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const candidate: Position = [
-      Math.random() * 38 - 19, // x: -19 to 19
+      Math.random() * 28 - 14, // x: -14 to 14
       Math.random() * 9 + 0.5, // y: 0.5 to 9.5
       19, // z
     ];
