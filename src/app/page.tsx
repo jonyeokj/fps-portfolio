@@ -22,13 +22,16 @@ const Page = () => {
         <Score />
       </UI>
 
-      <Canvas camera={{ fov: 75, position: [0, 2, 0] }} shadows>
-        <Sky sunPosition={[0, 3, 5]} turbidity={6} rayleigh={1.5} />
-        <Environment preset='city' environmentIntensity={0.6} />
+      <Canvas
+        camera={{ fov: 75, position: [0, 2, 0], rotation: [0, Math.PI, 0] }}
+        shadows
+      >
+        <Sky sunPosition={[0, 3, -5]} turbidity={6} rayleigh={1.5} />
+        <Environment preset='city' environmentIntensity={0.7} />
         <ambientLight intensity={0.08} />
         <hemisphereLight args={['#ffffff', '#b0b0b0', 0.1]} />
         <directionalLight
-          position={[0, 40, 80]}
+          position={[0, 40, -80]}
           intensity={1.3}
           castShadow
           shadow-mapSize-width={2048}

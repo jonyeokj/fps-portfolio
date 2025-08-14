@@ -12,7 +12,7 @@ export const useScoreLookAt = () => {
 
   useEffect(() => {
     if (score == 10) {
-      const target = new THREE.Vector3(0, 5, -20);
+      const target = new THREE.Vector3(0, 5, 20);
 
       // Compute desired quaternion
       const lookAtMatrix = new THREE.Matrix4();

@@ -16,7 +16,7 @@ const generateNonOverlappingPosition = (existing: Position[]): Position => {
     const candidate: Position = [
       Math.random() * 38 - 19, // x: -19 to 19
       Math.random() * 9 + 0.5, // y: 0.5 to 9.5
-      -19, // z
+      19, // z
     ];
 
     const tooClose = existing.some(([x, y]) => {
@@ -30,7 +30,7 @@ const generateNonOverlappingPosition = (existing: Position[]): Position => {
 
   // Fallback if no position found after max attempts
   console.warn('Could not find a non-overlapping position after max attempts');
-  return [0, 5, -19];
+  return [0, 5, 19];
 };
 
 const BallManager = () => {
@@ -44,7 +44,7 @@ const BallManager = () => {
   // Show one center ball before the game starts, spawn 5 balls when the game starts
   useEffect(() => {
     if (!gameStarted) {
-      setBalls([{ id: 'intro-ball', position: [0, 5, -19], color: 'gold' }]);
+      setBalls([{ id: 'intro-ball', position: [0, 5, 19], color: 'gold' }]);
     } else {
       const newBalls = [];
       for (let i = 0; i < 5; i++) {
