@@ -19,11 +19,11 @@ const ExperienceWorld = () => {
       <Physics gravity={[0, -9.8, 0]}>
         <Ground />
         <Wall
-          position={[0, 5, 20]}
+          position={[0, 5, 24]}
           rotation={[0, Math.PI / 2, 0]}
           color='white'
-          height={12}
-          depth={32}
+          height={13}
+          depth={35}
         />
         <BallManager />
         <group position={[-5, 3, 0]} rotation={[0, Math.PI / 2, 0]}>

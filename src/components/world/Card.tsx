@@ -21,7 +21,7 @@ type CardProps = {
 export default function Card({
   width = 2.4,
   height = 3,
-  depth = 0.02,
+  depth = 0.2,
   header = 'Header',
   date,
   subtext = [],
@@ -58,7 +58,7 @@ export default function Card({
   return (
     <group>
       {/* Background */}
-      <Box args={[width, height, depth]}>
+      <Box args={[width, height, depth]} castShadow>
         <meshBasicMaterial toneMapped={false}>
           <GradientTexture stops={[0, 1]} colors={['#2E5266', '#6E8898']} />
         </meshBasicMaterial>
