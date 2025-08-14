@@ -16,8 +16,8 @@ const Wall = ({
   rotation = [0, 0, 0],
   color = '#8e8e8e',
   width = 1,
-  height = 12,
-  depth = 32,
+  height = 10,
+  depth = 20,
 }: WallProps) => {
   const [ref] = useBox(() => ({
     args: [width, height, depth],

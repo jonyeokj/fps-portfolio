@@ -57,7 +57,7 @@ export default function Card({
 
   return (
     <group>
-      {/* Card Background */}
+      {/* Background */}
       <Box args={[width, height, depth]}>
         <meshBasicMaterial toneMapped={false}>
           <GradientTexture stops={[0, 1]} colors={['#2E5266', '#6E8898']} />

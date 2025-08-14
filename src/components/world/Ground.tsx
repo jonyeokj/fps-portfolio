@@ -11,9 +11,9 @@ const Ground = ({ color = 'white' }: GroundProps) => {
   }));
 
   return (
-    <mesh ref={ref} receiveShadow>
+    <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
       <planeGeometry args={[100, 100]} />
-      <meshStandardMaterial color={color} />
+      <meshStandardMaterial color={color} roughness={1} metalness={0} />
     </mesh>
   );
 };
