@@ -56,7 +56,7 @@ export default function Card({
   const topY = height / 2 - padding - topOffset;
 
   return (
-    <group>
+    <group userData={{ nonShootable: true }}>
       {/* Background */}
       <Box args={[width, height, depth]} castShadow>
         <meshBasicMaterial toneMapped={false}>

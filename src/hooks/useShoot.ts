@@ -16,15 +16,24 @@ export const useShoot = () => {
   const [bulletHoles, setBulletHoles] = useState<BulletHole[]>([]);
   const isLocked = usePointerStore((s) => s.isLocked);
 
+  // Helper function to check if an object or its parents are marked as non-shootable
+  const isNonShootable = (obj: THREE.Object3D | null): boolean => {
+    let cur: THREE.Object3D | null = obj;
+    while (cur) {
+      if (cur.userData && cur.userData.nonShootable) return true;
+      cur = cur.parent ?? null;
+    }
+    return false;
+  };
+
   // Raycast from camera center and add a bullet hole to the first non-ball object hit
   const shoot = useCallback(() => {
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
-    const intersects = raycaster.intersectObjects(scene.children, true);
 
-    const hit = intersects.find((hit) => {
-      return !hit.object.userData.isBall;
-    });
+    const intersects = raycaster.intersectObjects(scene.children, true);
+    const hit = intersects.find((h) => !isNonShootable(h.object));
+
     if (hit && hit.point && hit.face) {
       const id = crypto.randomUUID();
 

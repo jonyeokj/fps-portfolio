@@ -56,7 +56,7 @@ const Ball = ({
     <mesh
       ref={ref}
       onClick={handleClick}
-      userData={{ isBall: true }}
+      userData={{ nonShootable: true }}
       castShadow
       receiveShadow
     >

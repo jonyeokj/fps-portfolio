@@ -25,3 +25,9 @@ export const CARD_BULLETS = {
   gutter: 0.12,
   indentX: 0.06,
 };
+
+export const CARD_ANIMATION = {
+  dampPos: 6,
+  dampScale: 8,
+  scaleBoost: 0.06,
+};
