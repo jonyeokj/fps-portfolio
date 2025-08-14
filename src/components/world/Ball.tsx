@@ -53,7 +53,13 @@ const Ball = ({
   };
 
   return (
-    <mesh ref={ref} onClick={handleClick} castShadow receiveShadow>
+    <mesh
+      ref={ref}
+      onClick={handleClick}
+      userData={{ isBall: true }}
+      castShadow
+      receiveShadow
+    >
       <sphereGeometry args={[0.5, 32, 32]} />
       <meshStandardMaterial color={color} />
     </mesh>

@@ -22,7 +22,9 @@ export const useShoot = () => {
     raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
 
-    const hit = intersects[0];
+    const hit = intersects.find((hit) => {
+      return !hit.object.userData.isBall;
+    });
     if (hit && hit.point && hit.face) {
       const id = crypto.randomUUID();
 
