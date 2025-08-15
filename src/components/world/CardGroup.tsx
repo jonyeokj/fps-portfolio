@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
-import { CARD_ANIMATION } from '@/constants';
+import NavArrow from './NavArrow';
+import { CARD_ANIMATION, NAV_ARROW } from '@/constants';
 
 type Item = {
   width?: number;
@@ -37,21 +38,6 @@ const CardGroup = ({
   const groupsRef = useRef<(THREE.Group | null)[]>([]);
 
   const step = (2 * Math.PI) / n;
-
-  // Keyboard navigation
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        setTargetIndex((t) => t + 1);
-      } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        setTargetIndex((t) => t - 1);
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
 
   // Animate carousel rotation, position, rotation, and scale smoothly each frame
   useFrame((_, delta) => {
@@ -115,8 +101,25 @@ const CardGroup = ({
     }
   });
 
+  const navArrowLeftX = -(radiusX + NAV_ARROW.offsetX);
+  const navArrowRightX = radiusX + NAV_ARROW.offsetX;
+  const navArrowY = NAV_ARROW.y;
+  const navArrowZ = -centerZ + NAV_ARROW.zOffset;
+
   return (
     <group>
+      {/* Navigation arrows */}
+      <group position={[navArrowLeftX, navArrowY, navArrowZ]}>
+        <NavArrow
+          direction={-1}
+          onToggle={() => setTargetIndex((t) => t - 1)}
+        />
+      </group>
+      <group position={[navArrowRightX, navArrowY, navArrowZ]}>
+        <NavArrow direction={1} onToggle={() => setTargetIndex((t) => t + 1)} />
+      </group>
+
+      {/* Card groups */}
       {list.map((it, i) => {
         const angle = i * step;
         const x = Math.sin(angle) * radiusX;

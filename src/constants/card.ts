@@ -31,3 +31,9 @@ export const CARD_ANIMATION = {
   dampScale: 8,
   scaleBoost: 0.06,
 };
+
+export const NAV_ARROW = {
+  offsetX: 1.25,
+  y: 0,
+  zOffset: 0,
+};
