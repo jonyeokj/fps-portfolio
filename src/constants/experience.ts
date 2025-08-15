@@ -1,4 +1,5 @@
 export type Experience = {
+  id: string;
   header: string;
   date?: string;
   subtext: string[];
@@ -6,6 +7,7 @@ export type Experience = {
 
 export const EXPERIENCES: Experience[] = [
   {
+    id: 'exp-tiktok',
     header: 'Software Engineer Intern, TikTok',
     date: 'Feb 2024 - Oct 2024',
     subtext: [
@@ -15,6 +17,7 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
   {
+    id: 'exp-aucto',
     header: 'Part-time Backend Engineer, Aucto Marketplace',
     date: 'Jul 2023 - Nov 2023',
     subtext: [
@@ -23,6 +26,7 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
   {
+    id: 'exp-psa',
     header: 'Data Engineer Intern, PSA Singapore',
     date: 'May 2022 - Aug 2022',
     subtext: [
@@ -34,6 +38,7 @@ export const EXPERIENCES: Experience[] = [
 
 export const PROJECTS: Experience[] = [
   {
+    id: 'proj-lastminprep',
     header: 'LastMinPrep - Collaborative Coding Platform',
     date: 'Next.js, RabbitMQ, Docker',
     subtext: [
@@ -43,6 +48,7 @@ export const PROJECTS: Experience[] = [
     ],
   },
   {
+    id: 'proj-findtune',
     header: 'Findtune for Spotify - Song Recommendation Web App',
     date: 'React, Express',
     subtext: [
@@ -52,6 +58,7 @@ export const PROJECTS: Experience[] = [
     ],
   },
   {
+    id: 'proj-fps',
     header: 'FPS Portfolio',
     date: 'React Three Fiber, Three.js',
     subtext: [

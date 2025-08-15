@@ -16,6 +16,7 @@ type CardProps = {
   header?: string;
   date?: string;
   subtext?: string[];
+  locked?: boolean;
 };
 
 const Card = ({
@@ -25,6 +26,7 @@ const Card = ({
   header = 'Header',
   date,
   subtext = [],
+  locked = true,
 }: CardProps) => {
   const { padding, topOffset } = CARD_DIMENSIONS;
   const contentWidth = width - padding * 2;
@@ -88,7 +90,7 @@ const Card = ({
       </Text>
 
       {/* Date */}
-      {date && (
+      {date && !locked && (
         <Text
           font={fontPath}
           position={[
@@ -118,6 +120,7 @@ const Card = ({
 
       {/* Bullet list */}
       {subtext.length > 0 &&
+        !locked &&
         subtext.map((pt, i) => {
           const bulletsStartY =
             topY -

@@ -1,13 +1,15 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
 import NavArrow from './NavArrow';
 import { CARD_ANIMATION, NAV_ARROW } from '@/constants';
+import { useUnlockedCardsStore } from '@/stores/unlockStore';
 
 type Item = {
+  id: string;
   width?: number;
   height?: number;
   depth?: number;
@@ -36,6 +38,8 @@ const CardGroup = ({
   const [targetIndex, setTargetIndex] = useState(0);
   const animatedIndex = useRef(0);
   const groupsRef = useRef<(THREE.Group | null)[]>([]);
+
+  const unlockedMap = useUnlockedCardsStore((s) => s.unlocked);
 
   const step = (2 * Math.PI) / n;
 
@@ -124,6 +128,8 @@ const CardGroup = ({
         const angle = i * step;
         const x = Math.sin(angle) * radiusX;
         const z = centerZ - Math.cos(angle) * radiusZ;
+        const isUnlocked = !!unlockedMap[it.id];
+
         return (
           <group
             key={it.header ?? i}
@@ -132,7 +138,7 @@ const CardGroup = ({
             rotation={[0, 0, 0]}
             scale={[1, 1, 1]}
           >
-            <Card {...it} />
+            <Card {...it} locked={!isUnlocked} />
           </group>
         );
       })}
