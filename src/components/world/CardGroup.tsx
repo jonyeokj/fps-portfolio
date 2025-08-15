@@ -15,19 +15,19 @@ type Item = {
   subtext?: string[];
 };
 
-type Props = {
+type CardGroupProps = {
   items: Item[]; // 1..5
   radiusX?: number;
   radiusZ?: number;
   centerZ?: number;
 };
 
-export default function CardGroup({
+const CardGroup = ({
   items,
   radiusX = 3,
   radiusZ = 1,
   centerZ = 2,
-}: Props) {
+}: CardGroupProps) => {
   const list = items.slice(0, 5);
   const n = list.length;
   if (n === 0) return null;
@@ -135,4 +135,6 @@ export default function CardGroup({
       })}
     </group>
   );
-}
+};
+
+export default CardGroup;

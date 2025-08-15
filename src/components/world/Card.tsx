@@ -18,14 +18,14 @@ type CardProps = {
   subtext?: string[];
 };
 
-export default function Card({
+const Card = ({
   width = 2.4,
   height = 3,
   depth = 0.2,
   header = 'Header',
   date,
   subtext = [],
-}: CardProps) {
+}: CardProps) => {
   const { padding, topOffset } = CARD_DIMENSIONS;
   const contentWidth = width - padding * 2;
   const {
@@ -180,4 +180,6 @@ export default function Card({
         })}
     </group>
   );
-}
+};
+
+export default Card;
