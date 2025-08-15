@@ -60,7 +60,7 @@ const Card = ({
       {/* Background */}
       <Box args={[width, height, depth]} castShadow>
         <meshBasicMaterial toneMapped={false}>
-          <GradientTexture stops={[0, 1]} colors={['#2E5266', '#6E8898']} />
+          <GradientTexture stops={[0, 1]} colors={['#0d0d0d', '#595959']} />
         </meshBasicMaterial>
       </Box>
 

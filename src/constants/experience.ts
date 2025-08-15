@@ -31,3 +31,33 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
 ];
+
+export const PROJECTS: Experience[] = [
+  {
+    header: 'LastMinPrep - Collaborative Coding Platform',
+    date: 'Next.js, RabbitMQ, Docker',
+    subtext: [
+      'Built a real-time collaborative coding site with multi-language execution in isolated Docker sandboxes.',
+      'Used Next.js, RabbitMQ, and AWS ECS microservices for scalable, low-latency performance.',
+      'Deprecated due to AWS resource costs.',
+    ],
+  },
+  {
+    header: 'Findtune for Spotify - Song Recommendation Web App',
+    date: 'React, Express',
+    subtext: [
+      "Created a React app using Spotify's API to recommend songs by mood and tempo.",
+      'Added advanced search, audio previews, and deployed on Vercel with serverless functions.',
+      'https://findtune.vercel.app/',
+    ],
+  },
+  {
+    header: 'FPS Portfolio',
+    date: 'React Three Fiber, Three.js',
+    subtext: [
+      'Built an interactive first-person 3D portfolio using React Three Fiber and Three.js.',
+      'Implemented pointer lock controls, shooting mechanics, and dynamic scene interactions.',
+      'You are using it right now!',
+    ],
+  },
+];

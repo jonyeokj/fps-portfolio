@@ -23,7 +23,7 @@ const Page = () => {
       </UI>
 
       <Canvas
-        camera={{ fov: 75, position: [0, 2, 0], rotation: [0, Math.PI, 0] }}
+        camera={{ fov: 75, position: [0, 2.5, 0], rotation: [0, Math.PI, 0] }}
         shadows
       >
         <Sky sunPosition={[10, 40, -10]} turbidity={6} rayleigh={1.5} />
