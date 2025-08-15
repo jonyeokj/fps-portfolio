@@ -1,4 +1,3 @@
-// src/stores/unlockStore.ts
 'use client';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -9,7 +8,7 @@ type UnlockState = {
   reset: () => void;
 };
 
-export const useUnlockedCardsStore = create<UnlockState>()(
+export const useUnlockStore = create<UnlockState>()(
   persist(
     (set) => ({
       unlocked: {},

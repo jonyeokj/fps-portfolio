@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import Card from './Card';
 import NavArrow from './NavArrow';
 import { CARD_ANIMATION, NAV_ARROW } from '@/constants';
-import { useUnlockedCardsStore } from '@/stores/unlockStore';
+import { useUnlockStore } from '@/stores/unlockStore';
 
 type Item = {
   id: string;
@@ -39,7 +39,7 @@ const CardGroup = ({
   const animatedIndex = useRef(0);
   const groupsRef = useRef<(THREE.Group | null)[]>([]);
 
-  const unlockedMap = useUnlockedCardsStore((s) => s.unlocked);
+  const unlockedMap = useUnlockStore((s) => s.unlocked);
 
   const step = (2 * Math.PI) / n;
 

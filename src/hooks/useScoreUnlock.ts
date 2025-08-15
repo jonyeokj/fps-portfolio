@@ -1,16 +1,16 @@
 'use client';
 import { useEffect } from 'react';
 import { useGameStore } from '@/stores/gameStore';
-import { useUnlockedCardsStore } from '@/stores/unlockStore';
+import { useUnlockStore } from '@/stores/unlockStore';
 
-export const useUnlockedCards = (opts: {
+export const useScoreUnlock = (opts: {
   ids: string[];
   thresholds: Record<string, number>;
 }) => {
   const { ids, thresholds } = opts;
   const score = useGameStore((s) => s.score);
-  const unlockedMap = useUnlockedCardsStore((s) => s.unlocked);
-  const unlock = useUnlockedCardsStore((s) => s.unlock);
+  const unlockedMap = useUnlockStore((s) => s.unlocked);
+  const unlock = useUnlockStore((s) => s.unlock);
 
   useEffect(() => {
     for (const id of ids) {
