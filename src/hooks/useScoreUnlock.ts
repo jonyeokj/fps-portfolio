@@ -20,5 +20,5 @@ export const useScoreUnlock = (opts: {
         unlock(id);
       }
     }
-  }, [score, ids.join('|'), thresholds, unlockedMap, unlock]);
+  }, [score, thresholds, unlockedMap, unlock, ids]);
 };
