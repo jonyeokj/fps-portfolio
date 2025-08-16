@@ -1,7 +1,7 @@
 export const CARD_DIMENSIONS = {
   padding: 0.15,
   topOffset: 0.1,
-  logoSize: 0.1,
+  logoContentWidth: 0.3,
 };
 
 export const CARD_TYPOGRAPHY = {
@@ -20,7 +20,6 @@ export const CARD_SPACING = {
   gapHeaderDate: 0.05,
   gapDateBullets: 0.1,
   gapBetweenBullets: 0.06,
-  logoGap: 0.1,
 };
 
 export const CARD_BULLETS = {

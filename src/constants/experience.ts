@@ -43,7 +43,7 @@ export const EXPERIENCES: Experience[] = [
 export const PROJECTS: Experience[] = [
   {
     id: 'proj-lastminprep',
-    header: 'LastMinPrep - Collaborative Coding Platform',
+    header: 'LastMinPrep',
     subtext: [
       'Built a real-time collaborative coding site with multi-language execution in isolated Docker sandboxes.',
       'Used Next.js, RabbitMQ, and AWS ECS microservices for scalable, low-latency performance.',
@@ -53,13 +53,14 @@ export const PROJECTS: Experience[] = [
   },
   {
     id: 'proj-findtune',
-    header: 'Findtune for Spotify - Song Recommendation Web App',
+    header: 'Findtune for Spotify',
     subtext: [
       "Created a React app using Spotify's API to recommend songs by mood and tempo.",
       'Added advanced search, audio previews, and deployed on Vercel with serverless functions.',
       'https://findtune.vercel.app/',
     ],
     date: 'React, Express',
+    logo: '/assets/spotify.svg',
   },
   {
     id: 'proj-fps',

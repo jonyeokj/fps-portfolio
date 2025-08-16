@@ -34,6 +34,9 @@ const ExperienceWorld = () => {
         <group position={[-5, 3, 0]} rotation={[0, Math.PI / 2, 0]}>
           <CardGroup items={EXPERIENCES} />
         </group>
+        <group position={[5, 3, 0]} rotation={[0, -Math.PI / 2, 0]}>
+          <CardGroup items={PROJECTS} />
+        </group>
       </Physics>
 
       {bulletHoles.map((hole) => (

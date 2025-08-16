@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
 import NavArrow from './NavArrow';
-import { CARD_ANIMATION, NAV_ARROW } from '@/constants';
+import { CARD_ANIMATION, NAV_ARROW, SCORE_THRESHOLDS } from '@/constants';
 import { useUnlockStore } from '@/stores/unlockStore';
 
 type Item = {
@@ -129,7 +129,10 @@ const CardGroup = ({
         const angle = i * step;
         const x = Math.sin(angle) * radiusX;
         const z = centerZ - Math.cos(angle) * radiusZ;
-        const isUnlocked = !!unlockedMap[it.id];
+        
+        const isLocked = !unlockedMap[it.id];
+        const need = SCORE_THRESHOLDS[it.id]
+        const lockCaption = need ? `Score ${need} to unlock` : 'Locked';
 
         return (
           <group
@@ -139,7 +142,7 @@ const CardGroup = ({
             rotation={[0, 0, 0]}
             scale={[1, 1, 1]}
           >
-            <Card {...it} locked={!isUnlocked} />
+            <Card {...it} isLocked={isLocked} lockCaption={lockCaption}/>
           </group>
         );
       })}
