@@ -36,7 +36,7 @@ export const EXPERIENCES: Experience[] = [
       'Cleaned and analyzed datasets to identify port inefficiencies using pandas, and presented findings in monthly meetings with PowerBI.',
     ],
     date: 'May 2022 - Aug 2022',
-    logo: '/assets/psa.svg'
+    logo: '/assets/psaWhite.svg'
   },
 ];
 

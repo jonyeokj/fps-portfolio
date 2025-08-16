@@ -8,14 +8,16 @@ import {
   CARD_SPACING,
   CARD_BULLETS,
 } from '@/constants/card';
+import SvgBadge from './SvgBadge';
 
 type CardProps = {
   width?: number;
   height?: number;
   depth?: number;
   header?: string;
-  date?: string;
   subtext?: string[];
+  date?: string;
+  logo?: string;
   locked?: boolean;
 };
 
@@ -24,11 +26,12 @@ const Card = ({
   height = 3,
   depth = 0.2,
   header = 'Header',
-  date,
   subtext = [],
+  date,
+  logo,
   locked = true,
 }: CardProps) => {
-  const { padding, topOffset } = CARD_DIMENSIONS;
+  const { padding, topOffset, logoSize } = CARD_DIMENSIONS;
   const contentWidth = width - padding * 2;
   const {
     fontPath,
@@ -37,12 +40,14 @@ const Card = ({
     bodySize,
     lineHeights: { header: lhHeader, date: lhDate, body: lhBody },
   } = CARD_TYPOGRAPHY;
-  const { gapHeaderDate, gapDateBullets, gapBetweenBullets } = CARD_SPACING;
+  const { gapHeaderDate, gapDateBullets, gapBetweenBullets, logoGap } = CARD_SPACING;
   const { gutter: bulletGutter, indentX: bulletIndentX } = CARD_BULLETS;
 
   const [headerHeight, setHeaderHeight] = useState(0);
   const [dateHeight, setDateHeight] = useState(0);
   const [bulletHeights, setBulletHeights] = useState<number[]>([]);
+
+  const topY = height / 2 - padding - topOffset;
 
   const ensureBulletHeights = useMemo(
     () => (idx: number, h: number) => {
@@ -55,7 +60,6 @@ const Card = ({
     [],
   );
 
-  const topY = height / 2 - padding - topOffset;
 
   return (
     <group userData={{ nonShootable: true }}>
@@ -74,7 +78,7 @@ const Card = ({
         color='white'
         anchorX='left'
         anchorY='top'
-        maxWidth={contentWidth}
+        maxWidth={logo ? contentWidth - logoGap - logoSize : contentWidth}
         textAlign='left'
         lineHeight={lhHeader}
         overflowWrap='break-word'
@@ -86,11 +90,19 @@ const Card = ({
           setHeaderHeight(s.y);
         }}
       >
-        {header}
+        {locked ? '???' : header}
       </Text>
 
+      <SvgBadge
+        src={logo!}
+        width={width * 0.1}
+        position={[width / 2 - 0.35, height / 2 - 0.35, depth / 2 + 0.001]}
+        zBias={0.0005}
+        opacity={logo ? (locked ? 0 : 1) : 0}
+      />
+
       {/* Date */}
-      {date && !locked && (
+      {date && (
         <Text
           font={fontPath}
           position={[
@@ -114,7 +126,7 @@ const Card = ({
             setDateHeight(s.y);
           }}
         >
-          {date}
+          {locked ? '???' : date}
         </Text>
       )}
 
