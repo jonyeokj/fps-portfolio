@@ -79,15 +79,9 @@ const Card = ({
           <SvgBadge
             src={'/assets/lock.svg'}
             width={0.7}
-            position={[0, 0.15, zFront + 0.003]}
+            position={[0, 0.15, zFront]}
             opacity={1}
-            renderOrder={2}
           />
-
-          <mesh position={[0, 0, zFront + 0.004]} renderOrder={3}>
-            <planeGeometry args={[width, height]} />
-            <meshBasicMaterial color='black' transparent opacity={0.45} />
-          </mesh>
 
           {/* Caption */}
           <Text
@@ -98,7 +92,6 @@ const Card = ({
             anchorX='center'
             anchorY='middle'
             lineHeight={1.1}
-            renderOrder={1}
           >
             {lockCaption}
           </Text>
@@ -124,17 +117,18 @@ const Card = ({
             .sub(t.geometry.boundingBox!.min);
           setHeaderHeight(s.y);
         }}
-        renderOrder={1}
       >
         {isLocked ? '???' : header}
       </Text>
 
-      {logo && <SvgBadge
-        src={logo!}
-        width={width * 0.1}
-        position={[width / 2 - 0.35, height / 2 - 0.35, zFront]}
-        opacity={logo ? (isLocked ? 0 : 1) : 0}
-      />}
+      {logo && (
+        <SvgBadge
+          src={logo!}
+          width={width * 0.1}
+          position={[width / 2 - 0.35, height / 2 - 0.35, zFront]}
+          opacity={logo ? (isLocked ? 0 : 1) : 0}
+        />
+      )}
 
       {/* Date */}
       {date && (
@@ -160,7 +154,6 @@ const Card = ({
               .sub(t.geometry.boundingBox!.min);
             setDateHeight(s.y);
           }}
-          renderOrder={1}
         >
           {isLocked ? '???' : date}
         </Text>
@@ -186,11 +179,7 @@ const Card = ({
               {/* Bullet dot */}
               <Text
                 font={fontPath}
-                position={[
-                  -width / 2 + padding + bulletIndentX,
-                  y,
-                  zFront,
-                ]}
+                position={[-width / 2 + padding + bulletIndentX, y, zFront]}
                 fontSize={bodySize * 0.9}
                 color='white'
                 anchorX='left'
@@ -203,11 +192,7 @@ const Card = ({
               {/* Bullet text */}
               <Text
                 font={fontPath}
-                position={[
-                  -width / 2 + padding + bulletGutter,
-                  y,
-                  zFront,
-                ]}
+                position={[-width / 2 + padding + bulletGutter, y, zFront]}
                 fontSize={bodySize}
                 color='lightgray'
                 anchorX='left'

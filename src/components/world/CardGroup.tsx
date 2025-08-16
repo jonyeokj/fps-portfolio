@@ -5,7 +5,12 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
 import NavArrow from './NavArrow';
-import { CARD_ANIMATION, CARD_DIMENSIONS, NAV_ARROW, SCORE_THRESHOLDS } from '@/constants';
+import {
+  CARD_ANIMATION,
+  CARD_DIMENSIONS,
+  NAV_ARROW,
+  SCORE_THRESHOLDS,
+} from '@/constants';
 import { useUnlockStore } from '@/stores/unlockStore';
 
 type Item = {
@@ -81,10 +86,13 @@ const CardGroup = ({
       g.scale.setScalar(s);
 
       // Dim overlay
+      const isLocked = !unlockedMap[list[i].id];
       if (dimMesh) {
-        const base = 0.45;
-        const opacity = base * (1 - focus);
-        dimMesh.material.opacity = opacity;
+        if (isLocked) {
+          dimMesh.material.opacity = 0.45;
+        } else {
+          dimMesh.material.opacity = 0.45 * (1 - focus);
+        }
       }
 
       // Animation damping
@@ -144,9 +152,9 @@ const CardGroup = ({
         const w = CARD_DIMENSIONS.width;
         const h = CARD_DIMENSIONS.height;
         const d = CARD_DIMENSIONS.depth;
-        
+
         const isLocked = !unlockedMap[it.id];
-        const need = SCORE_THRESHOLDS[it.id]
+        const need = SCORE_THRESHOLDS[it.id];
         const lockCaption = need ? `Score ${need} to unlock` : 'Locked';
 
         return (
@@ -156,23 +164,31 @@ const CardGroup = ({
             position={[x, 0, -z]}
             rotation={[0, 0, 0]}
             scale={[1, 1, 1]}
-            userData={{nonShootable: true}}
+            userData={{ nonShootable: true }}
           >
             {/* Card */}
-            <Card width={w} height={h} depth={d} {...it} isLocked={isLocked} lockCaption={lockCaption}/>
+            <Card
+              width={w}
+              height={h}
+              depth={d}
+              {...it}
+              isLocked={isLocked}
+              lockCaption={lockCaption}
+            />
 
             {/* Side dim overlay */}
             <mesh
-              ref={(el) => (dimRefs.current[i] = el as THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> | null)}
+              ref={(el) =>
+                (dimRefs.current[i] = el as THREE.Mesh<
+                  THREE.PlaneGeometry,
+                  THREE.MeshBasicMaterial
+                > | null)
+              }
               position={[0, 0, d / 2 + 0.002]}
               renderOrder={10}
             >
               <planeGeometry args={[w, h]} />
-              <meshBasicMaterial
-                color="black"
-                transparent
-                opacity={0}
-              />
+              <meshBasicMaterial color='black' transparent opacity={0} />
             </mesh>
           </group>
         );
