@@ -97,7 +97,6 @@ const Card = ({
         src={logo!}
         width={width * 0.1}
         position={[width / 2 - 0.35, height / 2 - 0.35, depth / 2 + 0.001]}
-        zBias={0.0005}
         opacity={logo ? (locked ? 0 : 1) : 0}
       />
 
