@@ -33,7 +33,6 @@ const CardGroup = ({
 }: CardGroupProps) => {
   const list = items.slice(0, 5);
   const n = list.length;
-  if (n === 0) return null;
 
   const [targetIndex, setTargetIndex] = useState(0);
   const animatedIndex = useRef(0);
@@ -109,6 +108,8 @@ const CardGroup = ({
   const navArrowRightX = radiusX + NAV_ARROW.offsetX;
   const navArrowY = NAV_ARROW.y;
   const navArrowZ = -centerZ + NAV_ARROW.zOffset;
+
+  if (n === 0) return null;
 
   return (
     <group>

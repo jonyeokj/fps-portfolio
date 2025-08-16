@@ -1,6 +1,5 @@
 'use client';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 type UnlockState = {
   unlocked: Record<string, boolean>;
@@ -8,13 +7,11 @@ type UnlockState = {
   reset: () => void;
 };
 
-export const useUnlockStore = create<UnlockState>()(
-  persist(
-    (set) => ({
-      unlocked: {},
-      unlock: (id) => set((s) => ({ unlocked: { ...s.unlocked, [id]: true } })),
-      reset: () => set({ unlocked: {} }),
-    }),
-    { name: 'unlocked-cards' },
-  ),
-);
+export const useUnlockStore = create<UnlockState>((set) => ({
+  unlocked: {},
+  unlock: (id) =>
+    set((s) => ({
+      unlocked: { ...s.unlocked, [id]: true },
+    })),
+  reset: () => set({ unlocked: {} }),
+}));
