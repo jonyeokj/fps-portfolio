@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
 import NavArrow from './NavArrow';
-import { CARD_ANIMATION, NAV_ARROW, SCORE_THRESHOLDS } from '@/constants';
+import { CARD_ANIMATION, CARD_DIMENSIONS, NAV_ARROW, SCORE_THRESHOLDS } from '@/constants';
 import { useUnlockStore } from '@/stores/unlockStore';
 
 type Item = {
@@ -37,6 +37,9 @@ const CardGroup = ({
   const [targetIndex, setTargetIndex] = useState(0);
   const animatedIndex = useRef(0);
   const groupsRef = useRef<(THREE.Group | null)[]>([]);
+  const dimRefs = useRef<
+    (THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> | null)[]
+  >([]);
 
   const unlockedMap = useUnlockStore((s) => s.unlocked);
 
@@ -57,6 +60,7 @@ const CardGroup = ({
 
     for (let i = 0; i < n; i++) {
       const g = groupsRef.current[i];
+      const dimMesh = dimRefs.current[i];
       if (!g) continue;
 
       // Geometry math
@@ -75,6 +79,13 @@ const CardGroup = ({
         delta,
       );
       g.scale.setScalar(s);
+
+      // Dim overlay
+      if (dimMesh) {
+        const base = 0.45;
+        const opacity = base * (1 - focus);
+        dimMesh.material.opacity = opacity;
+      }
 
       // Animation damping
       g.position.x = THREE.MathUtils.damp(
@@ -129,6 +140,10 @@ const CardGroup = ({
         const angle = i * step;
         const x = Math.sin(angle) * radiusX;
         const z = centerZ - Math.cos(angle) * radiusZ;
+
+        const w = CARD_DIMENSIONS.width;
+        const h = CARD_DIMENSIONS.height;
+        const d = CARD_DIMENSIONS.depth;
         
         const isLocked = !unlockedMap[it.id];
         const need = SCORE_THRESHOLDS[it.id]
@@ -141,8 +156,24 @@ const CardGroup = ({
             position={[x, 0, -z]}
             rotation={[0, 0, 0]}
             scale={[1, 1, 1]}
+            userData={{nonShootable: true}}
           >
-            <Card {...it} isLocked={isLocked} lockCaption={lockCaption}/>
+            {/* Card */}
+            <Card width={w} height={h} depth={d} {...it} isLocked={isLocked} lockCaption={lockCaption}/>
+
+            {/* Side dim overlay */}
+            <mesh
+              ref={(el) => (dimRefs.current[i] = el as THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> | null)}
+              position={[0, 0, d / 2 + 0.002]}
+              renderOrder={10}
+            >
+              <planeGeometry args={[w, h]} />
+              <meshBasicMaterial
+                color="black"
+                transparent
+                opacity={0}
+              />
+            </mesh>
           </group>
         );
       })}

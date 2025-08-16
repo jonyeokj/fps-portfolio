@@ -2,6 +2,9 @@ export const CARD_DIMENSIONS = {
   padding: 0.15,
   topOffset: 0.1,
   logoContentWidth: 0.3,
+  width: 2.4,
+  height: 3,
+  depth: 0.2,
 };
 
 export const CARD_TYPOGRAPHY = {

@@ -11,9 +11,9 @@ import {
 import SvgBadge from './SvgBadge';
 
 type CardProps = {
-  width?: number;
-  height?: number;
-  depth?: number;
+  width: number;
+  height: number;
+  depth: number;
   header?: string;
   subtext?: string[];
   date?: string;
@@ -23,9 +23,9 @@ type CardProps = {
 };
 
 const Card = ({
-  width = 2.4,
-  height = 3,
-  depth = 0.2,
+  width,
+  height,
+  depth,
   header = 'Header',
   subtext = [],
   date,
@@ -64,7 +64,7 @@ const Card = ({
   );
 
   return (
-    <group userData={{ nonShootable: true }}>
+    <group>
       {/* Background */}
       <Box args={[width, height, depth]} castShadow>
         <meshBasicMaterial toneMapped={false}>
@@ -92,13 +92,13 @@ const Card = ({
           {/* Caption */}
           <Text
             font={fontPath}
-            position={[0, -0.4, zFront + 0.005]}
+            position={[0, -0.4, zFront]}
             fontSize={0.12}
             color='white'
             anchorX='center'
             anchorY='middle'
             lineHeight={1.1}
-            renderOrder={4}
+            renderOrder={1}
           >
             {lockCaption}
           </Text>
