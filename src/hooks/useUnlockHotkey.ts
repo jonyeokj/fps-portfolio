@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useUnlockStore } from '@/stores/unlockStore';
 
-export function useUnlockHotkey() {
+export const useUnlockHotkey = () => {
   const unlockAll = useUnlockStore((s) => s.unlockAll);
   const setHotkeyPressed = useUnlockStore((s) => s.setHotkeyPressed);
 
@@ -17,4 +17,4 @@ export function useUnlockHotkey() {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [unlockAll]);
-}
+};

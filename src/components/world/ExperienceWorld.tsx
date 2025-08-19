@@ -16,9 +16,9 @@ import { EXPERIENCES, PROJECTS } from '@/constants';
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
   useScoreLookAt();
+  useUnlockHotkey();
   useScoreUnlock(EXPERIENCES);
   useScoreUnlock(PROJECTS);
-  useUnlockHotkey();
 
   return (
     <>
