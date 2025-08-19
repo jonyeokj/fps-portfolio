@@ -8,16 +8,14 @@ import BulletHole from './BulletHole';
 import CardGroup from './CardGroup';
 import { useShoot } from '@/hooks/useShoot';
 import { useScoreLookAt } from '@/hooks/useScoreLookAt';
-import { EXPERIENCES, PROJECTS, SCORE_THRESHOLDS } from '@/constants';
+import { EXPERIENCES, PROJECTS } from '@/constants';
 import { useScoreUnlock } from '@/hooks/useScoreUnlock';
-import { useMemo } from 'react';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
   useScoreLookAt();
-
-  const ids = useMemo(() => [...EXPERIENCES, ...PROJECTS].map((x) => x.id), []);
-  useScoreUnlock({ ids, thresholds: SCORE_THRESHOLDS });
+  useScoreUnlock(EXPERIENCES);
+  useScoreUnlock(PROJECTS);
 
   return (
     <>

@@ -2,23 +2,19 @@
 import { useEffect } from 'react';
 import { useGameStore } from '@/stores/gameStore';
 import { useUnlockStore } from '@/stores/unlockStore';
+import { Experience } from '@/constants';
 
-export const useScoreUnlock = (opts: {
-  ids: string[];
-  thresholds: Record<string, number>;
-}) => {
-  const { ids, thresholds } = opts;
+export const useScoreUnlock = (items: Experience[]) => {
   const score = useGameStore((s) => s.score);
   const unlockedMap = useUnlockStore((s) => s.unlocked);
   const unlock = useUnlockStore((s) => s.unlock);
 
   useEffect(() => {
-    for (const id of ids) {
-      const need = thresholds[id];
-      if (need == null) continue;
-      if (!unlockedMap[id] && score >= need) {
+    for (const { id, threshold } of items) {
+      if (threshold == null) continue;
+      if (!unlockedMap[id] && score >= threshold) {
         unlock(id);
       }
     }
-  }, [score, thresholds, unlockedMap, unlock, ids]);
+  }, [score, items, unlockedMap, unlock]);
 };

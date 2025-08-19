@@ -9,7 +9,6 @@ import {
   CARD_ANIMATION,
   CARD_DIMENSIONS,
   NAV_ARROW,
-  SCORE_THRESHOLDS,
 } from '@/constants';
 import { useUnlockStore } from '@/stores/unlockStore';
 
@@ -21,6 +20,7 @@ type Item = {
   header?: string;
   date?: string;
   subtext?: string[];
+  threshold?: number;
 };
 
 type CardGroupProps = {
@@ -185,7 +185,7 @@ const CardGroup = ({
         const d = CARD_DIMENSIONS.depth;
 
         const isLocked = !unlockedMap[it.id];
-        const need = SCORE_THRESHOLDS[it.id];
+        const need = it.threshold;
         const lockCaption = need ? `Score ${need} to unlock` : 'Locked';
 
         return (

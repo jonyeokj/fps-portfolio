@@ -4,6 +4,7 @@ export type Experience = {
   subtext: string[];
   date?: string;
   logo?: string;
+  threshold?: number;
 };
 
 export const EXPERIENCES: Experience[] = [
@@ -15,7 +16,8 @@ export const EXPERIENCES: Experience[] = [
       'Cleaned and analyzed datasets to identify port inefficiencies using pandas, and presented findings in monthly meetings with PowerBI.',
     ],
     date: 'May 2022 - Aug 2022',
-    logo: '/assets/psaWhite.svg'
+    logo: '/assets/psaWhite.svg',
+    threshold: 1,
   },
   {
     id: 'exp-tiktok',
@@ -27,6 +29,7 @@ export const EXPERIENCES: Experience[] = [
     ],
     date: 'Feb 2024 - Oct 2024',
     logo: '/assets/tiktok.svg',
+    threshold: 5,
   },
   {
     id: 'exp-aucto',
@@ -37,6 +40,7 @@ export const EXPERIENCES: Experience[] = [
     ],
     date: 'Jul 2023 - Nov 2023',
     logo: '/assets/aucto.svg',
+    threshold: 3,
   },
 ];
 
@@ -50,6 +54,7 @@ export const PROJECTS: Experience[] = [
       'Deprecated due to AWS resource costs.',
     ],
     date: 'Next.js, RabbitMQ, Docker',
+    threshold: 4,
   },
   {
     id: 'proj-findtune',
@@ -61,6 +66,7 @@ export const PROJECTS: Experience[] = [
     ],
     date: 'React, Express',
     logo: '/assets/spotify.svg',
+    threshold: 2,
   },
   {
     id: 'proj-fps',
