@@ -6,15 +6,17 @@ import { Box, Text } from '@react-three/drei';
 type HeaderProps = {
   text: string;
   onHit?: () => void;
+  nonShootable?: boolean;
 };
 
-const Header = ({ text, onHit }: HeaderProps) => {
+const Header = ({ text, onHit, nonShootable = true }: HeaderProps) => {
   return (
     <group
       onClick={(e) => {
         e.stopPropagation();
         onHit?.();
       }}
+      userData={{ nonShootable }}
     >
       <Box
         args={[HEADER_CONFIG.width, HEADER_CONFIG.height, HEADER_CONFIG.depth]}
