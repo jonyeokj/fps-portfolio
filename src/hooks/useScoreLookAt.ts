@@ -1,27 +1,60 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { useGameStore } from '@/stores/gameStore';
+import { useUnlockStore } from '@/stores/unlockStore';
+import { EXPERIENCES, PROJECTS } from '@/constants';
 
 export const useScoreLookAt = () => {
   const { camera } = useThree();
-  const score = useGameStore((state) => state.score);
+  const unlockedMap = useUnlockStore((s) => s.unlocked);
   const targetQuat = useRef<THREE.Quaternion | null>(null);
+  const prevUnlockedRef = useRef<Map<string, boolean>>(new Map());
 
-  useEffect(() => {
-    if (score % 10 === 0 && score > 0) {
-      const target = new THREE.Vector3(-5, 3, 0);
+  const experienceIds = EXPERIENCES.map((e) => e.id);
+  const projectIds = PROJECTS.map((p) => p.id);
 
-      // Compute desired quaternion
+  // Compute desired quaternion
+  const computeQuat = useCallback(
+    (target: THREE.Vector3) => {
       const lookAtMatrix = new THREE.Matrix4();
       lookAtMatrix.lookAt(camera.position, target, camera.up);
-      const quat = new THREE.Quaternion().setFromRotationMatrix(lookAtMatrix);
+      return new THREE.Quaternion().setFromRotationMatrix(lookAtMatrix);
+    },
+    [camera]
+  );
 
-      targetQuat.current = quat;
+  useEffect(() => {
+    // Prevent lookAt on initialization
+    if (prevUnlockedRef.current.size === 0) {
+      for (const [id, isUnlocked] of Object.entries(unlockedMap)) {
+        prevUnlockedRef.current.set(id, isUnlocked);
+      }
+      return;
     }
-  }, [score, camera]);
+
+    // Compare previous and current unlocks
+    for (const [id, isUnlocked] of Object.entries(unlockedMap)) {
+      const prev = prevUnlockedRef.current.get(id) ?? false;
+
+      if (!prev && isUnlocked) {
+        let target: THREE.Vector3 | null = null;
+
+        if (experienceIds.includes(id)) {
+          target = new THREE.Vector3(-5, 3, 0);
+        } else if (projectIds.includes(id)) {
+          target = new THREE.Vector3(5, 3, 0);
+        }
+
+        if (target) {
+          targetQuat.current = computeQuat(target);
+        }
+      }
+
+      prevUnlockedRef.current.set(id, isUnlocked);
+    }
+  }, [unlockedMap, experienceIds, projectIds, computeQuat]);
 
   useFrame(() => {
     if (targetQuat.current) {
