@@ -22,7 +22,7 @@ export const useScoreLookAt = () => {
       lookAtMatrix.lookAt(camera.position, target, camera.up);
       return new THREE.Quaternion().setFromRotationMatrix(lookAtMatrix);
     },
-    [camera]
+    [camera],
   );
 
   useEffect(() => {

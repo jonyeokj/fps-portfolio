@@ -5,11 +5,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
 import NavArrow from './NavArrow';
-import {
-  CARD_ANIMATION,
-  CARD_DIMENSIONS,
-  NAV_ARROW,
-} from '@/constants';
+import { CARD_ANIMATION, CARD_DIMENSIONS, NAV_ARROW } from '@/constants';
 import { useUnlockStore } from '@/stores/unlockStore';
 
 type Item = {
@@ -67,11 +63,11 @@ const CardGroup = ({
         const diff = target - current;
         if (diff > n / 2) {
           target -= n;
-        } else if (diff < -n / 2){
+        } else if (diff < -n / 2) {
           target += n;
         }
 
-        setTargetIndex(targetIndex + (target - current)); 
+        setTargetIndex(targetIndex + (target - current));
         break;
       }
     }

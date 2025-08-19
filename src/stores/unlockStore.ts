@@ -2,7 +2,6 @@
 import { create } from 'zustand';
 import { EXPERIENCES, PROJECTS } from '@/constants';
 
-
 type UnlockState = {
   unlocked: Record<string, boolean>;
   unlock: (id: string) => void;
