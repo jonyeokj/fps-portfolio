@@ -43,6 +43,7 @@ const CardGroup = ({
   >([]);
 
   const unlockedMap = useUnlockStore((s) => s.unlocked);
+  const hotkeyPressed = useUnlockStore((s) => s.hotkeyPressed);
   const listIds = useMemo(() => list.map((x) => x.id), [list]);
   const prevUnlockedRef = useRef<Map<string, boolean>>(new Map());
 
@@ -50,6 +51,8 @@ const CardGroup = ({
 
   // Watches unlock state changes, update carousel target index to the unlocked card
   useEffect(() => {
+    if (hotkeyPressed) return;
+
     for (let i = 0; i < listIds.length; i++) {
       const id = listIds[i];
       const prev = prevUnlockedRef.current.get(id) ?? false;
@@ -75,7 +78,7 @@ const CardGroup = ({
     for (const id of listIds) {
       prevUnlockedRef.current.set(id, !!unlockedMap[id]);
     }
-  }, [unlockedMap, listIds, n, targetIndex]);
+  }, [unlockedMap, hotkeyPressed, listIds, n, targetIndex]);
 
   // Animate carousel rotation, position, rotation, and scale smoothly each frame
   useFrame((_, delta) => {

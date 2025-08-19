@@ -6,17 +6,19 @@ import Wall from './Wall';
 import BallManager from './BallManager';
 import BulletHole from './BulletHole';
 import CardGroup from './CardGroup';
+import Header from './Header';
 import { useShoot } from '@/hooks/useShoot';
 import { useScoreLookAt } from '@/hooks/useScoreLookAt';
-import { EXPERIENCES, PROJECTS } from '@/constants';
 import { useScoreUnlock } from '@/hooks/useScoreUnlock';
-import Header from './Header';
+import { useUnlockHotkey } from '@/hooks/useUnlockHotkey';
+import { EXPERIENCES, PROJECTS } from '@/constants';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
   useScoreLookAt();
   useScoreUnlock(EXPERIENCES);
   useScoreUnlock(PROJECTS);
+  useUnlockHotkey();
 
   return (
     <>

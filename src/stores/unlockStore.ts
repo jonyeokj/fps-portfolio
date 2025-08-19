@@ -5,6 +5,9 @@ import { EXPERIENCES, PROJECTS } from '@/constants';
 type UnlockState = {
   unlocked: Record<string, boolean>;
   unlock: (id: string) => void;
+  unlockAll: () => void;
+  hotkeyPressed: boolean;
+  setHotkeyPressed: (val: boolean) => void;
   reset: () => void;
 };
 
@@ -22,5 +25,13 @@ export const useUnlockStore = create<UnlockState>((set) => ({
     set((s) => ({
       unlocked: { ...s.unlocked, [id]: true },
     })),
+  unlockAll: () =>
+    set((s) => ({
+      unlocked: Object.fromEntries(
+        Object.keys(s.unlocked).map((id) => [id, true]),
+      ),
+    })),
+  hotkeyPressed: false,
+  setHotkeyPressed: (val) => set({ hotkeyPressed: val }),
   reset: () => set({ unlocked: initializeUnlocks() }),
 }));

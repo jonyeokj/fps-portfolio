@@ -9,6 +9,7 @@ import { EXPERIENCES, PROJECTS } from '@/constants';
 export const useScoreLookAt = () => {
   const { camera } = useThree();
   const unlockedMap = useUnlockStore((s) => s.unlocked);
+  const hotkeyPressed = useUnlockStore((s) => s.hotkeyPressed);
   const targetQuat = useRef<THREE.Quaternion | null>(null);
   const prevUnlockedRef = useRef<Map<string, boolean>>(new Map());
 
@@ -26,6 +27,8 @@ export const useScoreLookAt = () => {
   );
 
   useEffect(() => {
+    if (hotkeyPressed) return;
+
     // Prevent lookAt on initialization
     if (prevUnlockedRef.current.size === 0) {
       for (const [id, isUnlocked] of Object.entries(unlockedMap)) {
@@ -54,7 +57,7 @@ export const useScoreLookAt = () => {
 
       prevUnlockedRef.current.set(id, isUnlocked);
     }
-  }, [unlockedMap, experienceIds, projectIds, computeQuat]);
+  }, [unlockedMap, hotkeyPressed, experienceIds, projectIds, computeQuat]);
 
   useFrame(() => {
     if (targetQuat.current) {
