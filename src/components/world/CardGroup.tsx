@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import Card from './Card';
@@ -47,8 +47,39 @@ const CardGroup = ({
   >([]);
 
   const unlockedMap = useUnlockStore((s) => s.unlocked);
+  const listIds = useMemo(() => list.map((x) => x.id), [list]);
+  const prevUnlockedRef = useRef<Map<string, boolean>>(new Map());
 
   const step = (2 * Math.PI) / n;
+
+  // Watches unlock state changes, update carousel target index to the unlocked card
+  useEffect(() => {
+    for (let i = 0; i < listIds.length; i++) {
+      const id = listIds[i];
+      const prev = prevUnlockedRef.current.get(id) ?? false;
+      const curr = !!unlockedMap[id];
+
+      if (!prev && curr) {
+        const current = ((targetIndex % n) + n) % n; // normalize to 0..n-1
+        let target = i;
+
+        // Ensure that carousel takes the shortest path clockwise or anti-clockwise
+        const diff = target - current;
+        if (diff > n / 2) {
+          target -= n;
+        } else if (diff < -n / 2){
+          target += n;
+        }
+
+        setTargetIndex(targetIndex + (target - current)); 
+        break;
+      }
+    }
+
+    for (const id of listIds) {
+      prevUnlockedRef.current.set(id, !!unlockedMap[id]);
+    }
+  }, [unlockedMap, listIds, n, targetIndex]);
 
   // Animate carousel rotation, position, rotation, and scale smoothly each frame
   useFrame((_, delta) => {

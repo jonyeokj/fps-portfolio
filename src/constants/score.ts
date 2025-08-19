@@ -1,8 +1,8 @@
 export const SCORE_THRESHOLDS: Record<string, number> = {
-  'exp-tiktok': 1,
-  'exp-aucto': 2,
-  'exp-psa': 3,
+  'exp-psa': 1,
+  'exp-aucto': 3,
+  'exp-tiktok': 5,
+  'proj-fps': 0,
+  'proj-findtune': 2,
   'proj-lastminprep': 4,
-  'proj-findtune': 5,
-  'proj-fps': 6,
 };

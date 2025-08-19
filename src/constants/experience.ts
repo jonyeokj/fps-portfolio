@@ -8,6 +8,16 @@ export type Experience = {
 
 export const EXPERIENCES: Experience[] = [
   {
+    id: 'exp-psa',
+    header: 'Data Engineer Intern, PSA Singapore',
+    subtext: [
+      'Authored code documentation in Splunk and Python for existing data transformation procedures at Tuas Port.',
+      'Cleaned and analyzed datasets to identify port inefficiencies using pandas, and presented findings in monthly meetings with PowerBI.',
+    ],
+    date: 'May 2022 - Aug 2022',
+    logo: '/assets/psaWhite.svg'
+  },
+  {
     id: 'exp-tiktok',
     header: 'Software Engineer Intern, TikTok',
     subtext: [
@@ -27,16 +37,6 @@ export const EXPERIENCES: Experience[] = [
     ],
     date: 'Jul 2023 - Nov 2023',
     logo: '/assets/aucto.svg',
-  },
-  {
-    id: 'exp-psa',
-    header: 'Data Engineer Intern, PSA Singapore',
-    subtext: [
-      'Authored code documentation in Splunk and Python for existing data transformation procedures at Tuas Port.',
-      'Cleaned and analyzed datasets to identify port inefficiencies using pandas, and presented findings in monthly meetings with PowerBI.',
-    ],
-    date: 'May 2022 - Aug 2022',
-    logo: '/assets/psaWhite.svg'
   },
 ];
 
