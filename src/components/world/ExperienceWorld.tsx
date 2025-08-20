@@ -7,6 +7,7 @@ import BallManager from './BallManager';
 import BulletHole from './BulletHole';
 import CardGroup from './CardGroup';
 import Header from './Header';
+import { usePointerRaycastGate } from '@/hooks/usePointerRaycastGate';
 import { useShoot } from '@/hooks/useShoot';
 import { useScoreLookAt } from '@/hooks/useScoreLookAt';
 import { useScoreUnlock } from '@/hooks/useScoreUnlock';
@@ -16,6 +17,7 @@ import { useHelpStore } from '@/stores/helpStore';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
+  usePointerRaycastGate();
   useScoreLookAt();
   useScoreUnlock(EXPERIENCES);
   useScoreUnlock(PROJECTS);
