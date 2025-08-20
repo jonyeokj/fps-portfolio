@@ -16,5 +16,5 @@ export const useUnlockHotkey = () => {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [unlockAll]);
+  }, [setHotkeyPressed, unlockAll]);
 };

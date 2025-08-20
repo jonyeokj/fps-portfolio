@@ -7,9 +7,19 @@ type HeaderProps = {
   text: string;
   onHit?: () => void;
   nonShootable?: boolean;
+  width?: number;
+  height?: number;
+  depth?: number;
 };
 
-const Header = ({ text, onHit, nonShootable = true }: HeaderProps) => {
+const Header = ({
+  text,
+  onHit,
+  nonShootable = true,
+  width = HEADER_CONFIG.width,
+  height = HEADER_CONFIG.height,
+  depth = HEADER_CONFIG.depth,
+}: HeaderProps) => {
   return (
     <group
       onClick={(e) => {
@@ -18,9 +28,7 @@ const Header = ({ text, onHit, nonShootable = true }: HeaderProps) => {
       }}
       userData={{ nonShootable }}
     >
-      <Box
-        args={[HEADER_CONFIG.width, HEADER_CONFIG.height, HEADER_CONFIG.depth]}
-      >
+      <Box args={[width, height, depth]}>
         <meshBasicMaterial color='black' transparent opacity={0.5} />
       </Box>
 
@@ -30,8 +38,8 @@ const Header = ({ text, onHit, nonShootable = true }: HeaderProps) => {
         color='white'
         anchorX='center'
         anchorY='middle'
-        position={[0, 0, HEADER_CONFIG.depth / 2 + 0.01]}
-        maxWidth={HEADER_CONFIG.width - 0.6}
+        position={[0, 0, depth / 2 + 0.01]}
+        maxWidth={width - 0.6}
       >
         {text}
       </Text>

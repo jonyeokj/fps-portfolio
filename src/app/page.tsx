@@ -2,17 +2,20 @@
 
 import { Canvas } from '@react-three/fiber';
 import { Sky, PointerLockControls, Environment } from '@react-three/drei';
-import ExperienceWorld from '@/components/world/ExperienceWorld';
-import { UI } from '@/components/ui/UI';
+import UI from '@/components/ui/UI';
 import Score from '@/components/ui/Score';
-import { Crosshair } from '@/components/ui/Crosshair';
-import { PointerLockOverlay } from '@/components/ui/PointerLockOverlay';
+import Help from '@/components/ui/Help';
+import Crosshair from '@/components/ui/Crosshair';
+import PointerLockOverlay from '@/components/ui/PointerLockOverlay';
+import ExperienceWorld from '@/components/world/ExperienceWorld';
 import { usePointerStore } from '@/stores/pointerStore';
+import { useHelpHotkey } from '@/hooks/useHelpHotkey';
 
 const Page = () => {
   const isLocked = usePointerStore((s) => s.isLocked);
   const canLock = usePointerStore((s) => s.canLock);
   const setLocked = usePointerStore((s) => s.setLocked);
+  useHelpHotkey();
 
   return (
     <main className='h-screen w-screen bg-black'>
@@ -20,6 +23,7 @@ const Page = () => {
       <UI>
         {isLocked && <Crosshair />}
         <Score />
+        <Help />
       </UI>
 
       <Canvas
