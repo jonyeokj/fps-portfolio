@@ -22,6 +22,17 @@ const Help = () => {
           I&apos;m Jonathan Yeo, and this project was built using React and
           three.js, inspired by my love for FPS games.
         </div>
+        <div>
+          Connect with me on{' '}
+          <a
+            href='https://www.linkedin.com/in/jonyeokj/'
+            target='_blank'
+            className='text-blue-400 hover:text-blue-600 hover:underline transition-colors duration-200'
+          >
+            LinkedIn
+          </a>
+          .
+        </div>
         <div className='mb-1'>
           Shoot the targets to explore my experiences and projects.
         </div>
