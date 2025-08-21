@@ -1,17 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Roboto } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-roboto',
-});
 
 export const metadata: Metadata = {
   title: 'FPS Portfolio',
@@ -26,11 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body
-        className={`${inter.variable} ${roboto.variable} antialiased h-screen`}
-      >
-        {children}
-      </body>
+      <body className={`antialiased h-screen`}>{children}</body>
     </html>
   );
 }
