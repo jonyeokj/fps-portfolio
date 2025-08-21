@@ -6,7 +6,7 @@ const Help = () => {
   const showHelp = useHelpStore((s) => s.showHelp);
 
   return (
-    <div className='absolute bottom-4 right-4 z-50 items-center text-lg'>
+    <div className='absolute bottom-4 right-4 z-50 items-center text-lg shadow-xl'>
       <div
         className={[
           'flex flex-col w-lg text-white bg-black/80 rounded-lg p-4 border-[1px] border-[white] text-left gap-2',

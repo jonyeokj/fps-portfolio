@@ -6,6 +6,7 @@ import ResponsiveDisclaimer from '@/components/ui/ResponsiveDisclaimer';
 import UI from '@/components/ui/UI';
 import Score from '@/components/ui/Score';
 import Help from '@/components/ui/Help';
+import Unlock from '@/components/ui/Unlock';
 import Crosshair from '@/components/ui/Crosshair';
 import PointerLockOverlay from '@/components/ui/PointerLockOverlay';
 import ExperienceWorld from '@/components/world/ExperienceWorld';
@@ -32,6 +33,7 @@ const Page = () => {
           {isLocked && <Crosshair />}
           <Score />
           <Help />
+          <Unlock />
         </UI>
 
         <Canvas

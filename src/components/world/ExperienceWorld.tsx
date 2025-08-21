@@ -59,7 +59,7 @@ const ExperienceWorld = () => {
         {/* Back  */}
         <group position={[0, 2.8, -5]}>
           <Header
-            text='Help'
+            text='Info'
             width={1}
             nonShootable={false}
             onHit={enableHelp}
