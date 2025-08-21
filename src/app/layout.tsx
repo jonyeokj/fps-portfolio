@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'FPS Portfolio',
+  title: 'jonyeokj',
   description:
     'A first-person shooter portfolio showcasing my experiences and projects',
 };
