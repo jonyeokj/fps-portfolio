@@ -20,6 +20,7 @@ type CardProps = {
   logo?: string;
   isLocked?: boolean;
   lockCaption?: string;
+  bulletPoints?: boolean;
 };
 
 const Card = ({
@@ -32,6 +33,7 @@ const Card = ({
   logo,
   isLocked = false,
   lockCaption = 'Locked',
+  bulletPoints = true,
 }: CardProps) => {
   const { padding, topOffset, logoContentWidth } = CARD_DIMENSIONS;
   const contentWidth = width - padding * 2;
@@ -177,27 +179,33 @@ const Card = ({
           return (
             <group key={i}>
               {/* Bullet dot */}
-              <Text
-                font={fontPath}
-                position={[-width / 2 + padding + bulletIndentX, y, zFront]}
-                fontSize={bodySize * 0.9}
-                color='white'
-                anchorX='left'
-                anchorY='top'
-                lineHeight={lhBody}
-              >
-                •
-              </Text>
+              {bulletPoints && (
+                <Text
+                  font={fontPath}
+                  position={[-width / 2 + padding + bulletIndentX, y, zFront]}
+                  fontSize={bodySize * 0.9}
+                  color='white'
+                  anchorX='left'
+                  anchorY='top'
+                  lineHeight={lhBody}
+                >
+                  •
+                </Text>
+              )}
 
               {/* Bullet text */}
               <Text
                 font={fontPath}
-                position={[-width / 2 + padding + bulletGutter, y, zFront]}
+                position={[
+                  -width / 2 + padding + (bulletPoints ? bulletGutter : 0),
+                  y,
+                  zFront,
+                ]}
                 fontSize={bodySize}
                 color='lightgray'
                 anchorX='left'
                 anchorY='top'
-                maxWidth={contentWidth - bulletGutter}
+                maxWidth={contentWidth - (bulletPoints ? bulletGutter : 0)}
                 textAlign='left'
                 lineHeight={lhBody}
                 overflowWrap='break-word'

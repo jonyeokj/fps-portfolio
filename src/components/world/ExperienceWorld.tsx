@@ -12,8 +12,9 @@ import { useShoot } from '@/hooks/useShoot';
 import { useScoreLookAt } from '@/hooks/useScoreLookAt';
 import { useScoreUnlock } from '@/hooks/useScoreUnlock';
 import { useUnlockHotkey } from '@/hooks/useUnlockHotkey';
-import { EXPERIENCES, PROJECTS } from '@/constants';
+import { ABOUT_ME, EXPERIENCES, PROJECTS } from '@/constants';
 import { useHelpStore } from '@/stores/helpStore';
+import Card from './Card';
 
 const ExperienceWorld = () => {
   const { bulletHoles, expireHole } = useShoot();
@@ -58,12 +59,23 @@ const ExperienceWorld = () => {
 
         {/* Back  */}
         <group position={[0, 2.8, -5]}>
-          <Header
-            text='Info'
-            width={1}
-            nonShootable={false}
-            onHit={enableHelp}
-          />
+          <group userData={{ nonShootable: true }} position={[-1, 0, -1]}>
+            <Card
+              width={2.4}
+              height={3}
+              depth={0.2}
+              {...ABOUT_ME}
+              bulletPoints={false}
+            />
+          </group>
+          <group position={[1, 0, 0]}>
+            <Header
+              text='Help'
+              width={1}
+              nonShootable={false}
+              onHit={enableHelp}
+            />
+          </group>
         </group>
       </Physics>
 
