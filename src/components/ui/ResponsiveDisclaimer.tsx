@@ -1,7 +1,7 @@
 const ResponsiveDisclaimer = () => {
   return (
-    <div className='flex flex-col items-center justify-center h-full w-screen text-wrap text-center gap-1'>
-      <div>This website is not supported by phones or tablets.</div>
+    <div className='flex flex-col items-center justify-center px-6 h-full w-screen text-wrap text-white text-center gap-1'>
+      <div>This website is currently not supported by phones or tablets.</div>
       <div className='mb-4'>Please run it on a computer instead.</div>
       <div className='text-gray-300'>
         Connect with me on{' '}
