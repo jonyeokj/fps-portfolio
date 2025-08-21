@@ -7,7 +7,7 @@ const Help = () => {
 
   return (
     <div
-      className={`absolute bottom-4 right-4 z-50 text-lg transition-opacity duration-200 ease-out motion-reduce:transition-none ${
+      className={`absolute bottom-4 right-4 z-50 text-xl transition-opacity duration-200 ease-out motion-reduce:transition-none ${
         showHelp ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
@@ -36,10 +36,7 @@ const Help = () => {
           Shoot the targets to explore my experiences and projects.
         </div>
 
-        <div className='text-center text-base text-gray-300'>
-          <div>
-            [Press <code>U</code> to unlock everything instantly.]
-          </div>
+        <div className='text-center text-lg text-gray-300'>
           <div>
             [Press <code>Space</code> to close this panel.]
           </div>

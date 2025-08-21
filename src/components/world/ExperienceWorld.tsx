@@ -70,7 +70,7 @@ const ExperienceWorld = () => {
           </group>
           <group position={[1, 0, 0]}>
             <Header
-              text='Help'
+              text='Intro'
               width={1}
               nonShootable={false}
               onHit={enableHelp}
