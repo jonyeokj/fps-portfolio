@@ -6,17 +6,12 @@ const Help = () => {
   const showHelp = useHelpStore((s) => s.showHelp);
 
   return (
-    <div className='absolute bottom-4 right-4 z-50 items-center text-lg shadow-xl'>
-      <div
-        className={[
-          'flex flex-col w-lg text-white bg-black/80 rounded-lg p-4 border-[1px] border-[white] text-left gap-2',
-          'transition-all duration-200 ease-out',
-          'motion-reduce:transition-none',
-          showHelp
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 translate-y-1 pointer-events-none',
-        ].join(' ')}
-      >
+    <div
+      className={`absolute bottom-4 right-4 z-50 text-lg transition-opacity duration-200 ease-out motion-reduce:transition-none ${
+        showHelp ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
+    >
+      <div className='flex flex-col w-lg text-white bg-black/80 rounded-lg p-4 border border-white text-left gap-2'>
         <div>Welcome to my FPS Portfolio!</div>
         <div>
           I&apos;m Jonathan Yeo, and this project was built using React and

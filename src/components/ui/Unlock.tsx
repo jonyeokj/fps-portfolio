@@ -27,7 +27,7 @@ const Unlock = () => {
         visible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <div className='absolute rounded-lg top-1/12 bg-black/80 text-white px-6 py-4 shadow-xl'>
+      <div className='absolute rounded-lg top-1/12 bg-black/80 text-white px-6 py-4'>
         <div className='text-2xl'>haha loser</div>
       </div>
     </div>
