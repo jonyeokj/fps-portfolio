@@ -17,8 +17,12 @@ import { useHelpHotkey } from '@/hooks/useHelpHotkey';
 const Page = () => {
   const isLocked = usePointerStore((s) => s.isLocked);
   const canLock = usePointerStore((s) => s.canLock);
+  const cameraGuiding = usePointerStore((s) => s.cameraGuiding);
   const setLocked = usePointerStore((s) => s.setLocked);
   useHelpHotkey();
+
+  // TODO: Create website fallback for no WebGL and mobile
+  // if (!THREE.WEBGL.isWebGLAvailable())
 
   return (
     <>
@@ -65,6 +69,7 @@ const Page = () => {
             selector='canvas'
             onLock={() => setLocked(true)}
             onUnlock={() => setLocked(false)}
+            enabled={!cameraGuiding}
           />
         </Canvas>
       </main>

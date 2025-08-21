@@ -36,6 +36,12 @@ const Help = () => {
           Shoot the targets to explore my experiences and projects.
         </div>
 
+        <div className='text-sm text-gray-400 italic'>
+          Note: This site uses WebGL for 3D rendering. Performance may vary
+          depending on your browser, GPU, and driver support. For best results,
+          use a modern browser with hardware acceleration enabled.
+        </div>
+
         <div className='text-center text-lg text-gray-300'>
           <div>
             [Press <code>Space</code> to close this panel.]

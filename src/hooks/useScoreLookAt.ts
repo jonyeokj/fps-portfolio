@@ -5,11 +5,13 @@ import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useUnlockStore } from '@/stores/unlockStore';
 import { EXPERIENCES, PROJECTS } from '@/constants';
+import { usePointerStore } from '@/stores/pointerStore';
 
 export const useScoreLookAt = () => {
   const { camera } = useThree();
   const unlockedMap = useUnlockStore((s) => s.unlocked);
   const hotkeyPressed = useUnlockStore((s) => s.hotkeyPressed);
+  const setCameraGuiding = usePointerStore((s) => s.setCameraGuiding);
   const targetQuat = useRef<THREE.Quaternion | null>(null);
   const prevUnlockedRef = useRef<Map<string, boolean>>(new Map());
 
@@ -52,6 +54,7 @@ export const useScoreLookAt = () => {
 
         if (target) {
           targetQuat.current = computeQuat(target);
+          setCameraGuiding(true);
         }
       }
 
@@ -66,6 +69,7 @@ export const useScoreLookAt = () => {
 
       if (camera.quaternion.angleTo(targetQuat.current) < 0.01) {
         targetQuat.current = null;
+        setCameraGuiding(false);
       }
     }
   });
