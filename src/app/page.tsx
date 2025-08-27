@@ -47,7 +47,10 @@ const Page = () => {
           shadows
         >
           <Sky sunPosition={[10, 40, -10]} turbidity={6} rayleigh={1.5} />
-          <Environment preset='city' environmentIntensity={0.7} />
+          <Environment
+            files='https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr'
+            environmentIntensity={0.7}
+          />
           <ambientLight intensity={0.08} />
           <hemisphereLight args={['#ffffff', '#b0b0b0', 0.1]} />
           <directionalLight
